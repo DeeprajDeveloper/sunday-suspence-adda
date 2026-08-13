@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sunday Suspense Adda
 
-## Getting Started
+A one-page music player for the public [Sunday Suspense Collection](https://www.youtube.com/playlist?list=PLDfPvBheqN1M) playlist. YouTube stays the source of truth; this site is just a listening room.
 
-First, run the development server:
+## Run locally
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Playback works without an API key. The queue fills from the YouTube player (and the public RSS feed for the latest titles).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Full track list (recommended)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To show every episode title in the queue on first load:
 
-## Learn More
+1. Create a project in [Google Cloud Console](https://console.cloud.google.com/).
+2. Enable **YouTube Data API v3**.
+3. Create an **API key** and restrict it to your domain (and `localhost:3000` while developing).
+4. Put the key in `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+YOUTUBE_API_KEY=your_key_here
+YOUTUBE_PLAYLIST_ID=PLDfPvBheqN1M
+NEXT_PUBLIC_YOUTUBE_PLAYLIST_ID=PLDfPvBheqN1M
+```
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push this repo to GitHub.
+2. Import the project in Vercel.
+3. Add the same environment variables in the Vercel dashboard.
+4. Deploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The playlist ID is already set to `PLDfPvBheqN1M`. Change it if you curate a different list.

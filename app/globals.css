@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-paper: var(--paper);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-wine: var(--wine);
+  --font-display: var(--font-mina);
+  --font-bengali: var(--font-mina);
+  --font-title: var(--font-mina);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: dark;
+  --ink: #0e0908;
+  --surface: #17100f;
+  --paper: #f3e6d0;
+  --gold: #c9a227;
+  --gold-soft: #e0c36a;
+  --wine: #6e1c28;
+}
+
+html.light {
+  color-scheme: light;
+  --ink: #f3ece1;
+  --surface: #e7dccb;
+  --paper: #1a110e;
+  --gold: #c4283a;
+  --gold-soft: #e04a58;
+  --wine: #8b1e2d;
+}
+
+html,
+body {
+  background: var(--ink);
+  color: var(--paper);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  font-family: var(--font-mina), "Mina", sans-serif;
+}
+
+.grain {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgb(110 28 40 / 0.28), transparent 70%),
+    var(--ink);
+}
+
+html.light .grain {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgb(122 36 48 / 0.1), transparent 70%),
+    var(--ink);
+}
+
+.grain::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+}
+
+html.light .grain::before {
+  opacity: 0.035;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spin-slow 28s linear infinite;
+}
+
+.yt-host iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+h1 {
+  font-size: 40px;
 }
