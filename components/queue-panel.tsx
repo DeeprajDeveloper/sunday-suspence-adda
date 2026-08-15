@@ -104,8 +104,9 @@ export function QueuePanel() {
 
   return (
     <>
+      {/* overlay: shown for floating panel; on mobile also shown behind docked panel */}
       <div
-        className={`queue-overlay${visible && !queueDocked ? "" : " queue-overlay--hidden"}`}
+        className={`queue-overlay${visible && !queueDocked ? "" : " queue-overlay--hidden"} ${queueDocked ? "queue-overlay--docked" : ""}`}
         onClick={() => setQueueOpen(false)}
       />
       <aside

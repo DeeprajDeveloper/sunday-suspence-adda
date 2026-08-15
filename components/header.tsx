@@ -69,8 +69,8 @@ export function Header({ playlistId }: { playlistId?: string }) {
           aria-label="YouTube Playlist"
           title="Open YouTube Playlist"
         >
-          <span>YouTube Playlist</span>
-          <SquareArrowOutUpRight size={14} />
+          <span className="site-header__yt-link-text">YouTube Playlist</span>
+          <YtIcon />
         </a>
       </div>
     </header>

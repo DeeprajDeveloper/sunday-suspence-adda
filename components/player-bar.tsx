@@ -173,11 +173,6 @@ export function PlayerBar({ playlistId }: { playlistId: string }) {
             </span>
           </div>
 
-          {/* <p className="player-card__credit">
-            <TvMinimalPlay />
-            YouTube · Mirchi Bangla
-          </p> */}
-
         </div>
       </div>
     </>
