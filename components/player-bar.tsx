@@ -48,7 +48,7 @@ export function PlayerBar({ playlistId }: { playlistId: string }) {
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
         <YouTubeEngine playlistId={playlistId} />
       </div>
-      <div className="relative z-10 bg-ink transform-gpu">
+      <div className="relative z-10 bg-ink/90 backdrop-blur-md transform-gpu">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-3 pt-3 sm:gap-4 sm:px-6">
           <div className="size-12 shrink-0 overflow-hidden rounded-md bg-wine/40 sm:size-14">
             {current ? (
