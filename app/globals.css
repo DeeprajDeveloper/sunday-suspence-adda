@@ -292,6 +292,7 @@ img {
   text-wrap: balance;
   text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
   line-height: 1.2;
+  /* opacity: 0.5; */
 }
 
 .now-playing__author {
@@ -680,6 +681,92 @@ img {
 }
 
 /* ───────────────────────────────────────
+   Player card — Minimized
+   ─────────────────────────────────────── */
+
+.player-card--minimized {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 16px;
+}
+
+.player-card--minimized .player-card__mini-thumb {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--wine) 50%, var(--ink));
+}
+
+.player-card--minimized .player-card__mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.player-card--minimized .player-card__mini-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--paper);
+}
+
+.player-card--minimized .player-card__transport {
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.player-card--minimized .player-card__progress-slider {
+  flex: 1.5;
+  min-width: 60px;
+}
+
+.player-card--minimized .player-card__controls-right {
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.player-card--minimized .player-card__mini-vol {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.player-card--minimized .player-card__mini-vol-slider {
+  width: 72px;
+}
+
+/* on mobile: drop progress + volume since there's no room */
+@media (max-width: 639px) {
+  .player-card--minimized {
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: 14px;
+  }
+
+  .player-card--minimized .player-card__mini-thumb {
+    width: 36px;
+    height: 36px;
+  }
+
+  .player-card--minimized .player-card__time,
+  .player-card--minimized .player-card__progress-slider,
+  .player-card--minimized .player-card__mini-vol {
+    display: none;
+  }
+}
+
+/* ───────────────────────────────────────
    Player card — Tablet  (640 – 1023 px)
    ─────────────────────────────────────── */
 
@@ -1044,6 +1131,211 @@ img {
   font-size: 11px;
   color: var(--gold);
   flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+   Background video picker
+   ───────────────────────────────────────────── */
+
+.bg-picker {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: var(--z-playerbar);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  /* shift left when queue is docked */
+  transition: right var(--transition-slow);
+}
+
+.shell--queue-docked .bg-picker {
+  right: calc(var(--queue-panel-width) + 16px);
+}
+
+@media (max-width: 767px) {
+  .shell--queue-docked .bg-picker {
+    right: 12px;
+  }
+}
+
+@media (max-width: 639px) {
+  .bg-picker {
+    bottom: 120px;
+    right: 12px;
+  }
+}
+
+/* ── Toggle button (pill with label) ── */
+
+.bg-picker__toggle {
+  height: 42px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: var(--radius-full);
+  border: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: color-mix(in srgb, var(--paper) 65%, transparent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.bg-picker__toggle:hover {
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  border-color: color-mix(in srgb, var(--gold) 45%, transparent);
+  color: var(--paper);
+}
+
+.bg-picker__toggle--active {
+  border-color: color-mix(in srgb, var(--gold) 50%, transparent);
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+  color: var(--gold);
+}
+
+.bg-picker__toggle svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.bg-picker__toggle-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* hide label text on very small screens */
+@media (max-width: 380px) {
+  .bg-picker__toggle-label {
+    display: none;
+  }
+  .bg-picker__toggle {
+    width: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+/* ── Popover panel ── */
+
+.bg-picker__panel {
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid color-mix(in srgb, var(--gold) 18%, transparent);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* wide enough for 4 swatches, constrained on small screens */
+  width: min(400px, calc(100vw - 24px));
+  animation: picker-in 150ms ease;
+}
+
+@keyframes picker-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+.bg-picker__panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bg-picker__panel-title {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: color-mix(in srgb, var(--paper) 55%, transparent);
+  text-transform: uppercase;
+}
+
+.bg-picker__close-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: color-mix(in srgb, var(--paper) 55%, transparent);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.bg-picker__close-btn:hover {
+  background: color-mix(in srgb, var(--paper) 10%, transparent);
+  color: var(--paper);
+}
+
+.bg-picker__close-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* ── Swatches (4-column grid) ── */
+
+.bg-picker__swatches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.bg-picker__swatch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.bg-picker__swatch:hover {
+  transform: scale(1.04);
+  border-color: color-mix(in srgb, var(--gold) 55%, transparent);
+}
+
+.bg-picker__swatch--active {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.bg-picker__swatch-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+}
+
+.bg-picker__swatch-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3px 5px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  text-align: center;
 }
 
 /* ─────────────────────────────────────────────

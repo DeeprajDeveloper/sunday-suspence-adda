@@ -55,8 +55,6 @@ export function Header({ playlistId }: { playlistId?: string }) {
       </div>
 
       <div className="site-header__center">
-        {/* <p className="site-header__eyebrow">{SITE_NAME}</p> */}
-        {/* <h1 className="site-header__title">{SITE_NAME_BN}</h1> */}
         <p className="site-header__tagline">{SITE_TAGLINE_BN}</p>
       </div>
 
