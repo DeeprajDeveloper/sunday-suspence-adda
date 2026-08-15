@@ -30,7 +30,7 @@ export function Slider({ value, max, onChange, ariaLabel, className = "" }: Slid
       aria-valuemin={0}
       aria-valuemax={Math.round(max)}
       aria-valuenow={Math.round(value)}
-      className={`group relative flex h-5 min-w-0 cursor-pointer items-center ${className}`}
+      className={`slider ${className}`}
       onPointerDown={(event) => {
         event.currentTarget.setPointerCapture(event.pointerId);
         updateFromPointer(event);
@@ -52,14 +52,11 @@ export function Slider({ value, max, onChange, ariaLabel, className = "" }: Slid
         }
       }}
     >
-      <div className="h-1.5 w-full rounded-full bg-paper/15">
-        <div
-          className="h-full rounded-full bg-gold"
-          style={{ width: `${pct}%` }}
-        />
+      <div className="slider__track">
+        <div className="slider__fill" style={{ width: `${pct}%` }} />
       </div>
       <div
-        className="absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        className="slider__thumb"
         style={{ left: `${pct}%` }}
       />
     </div>

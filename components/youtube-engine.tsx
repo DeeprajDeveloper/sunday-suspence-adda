@@ -74,5 +74,5 @@ export function YouTubeEngine({ playlistId }: { playlistId: string }) {
     };
   }, [playlistId]);
 
-  return <div ref={wrapperRef} className="yt-host size-full" />;
+  return <div ref={wrapperRef} className="yt-host" />;
 }

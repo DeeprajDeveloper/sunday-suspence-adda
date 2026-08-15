@@ -35,10 +35,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="bn"
-      className={`${atma.variable} ${mina.variable} ${pangolin.variable} h-full antialiased`}
+      className={`${atma.variable} ${mina.variable} ${pangolin.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-full bg-ink font-bengali text-paper">
+      <body>
         <Script id="theme-init" strategy="beforeInteractive">
           {`try{if(localStorage.getItem("theme")==="light")document.documentElement.classList.add("light")}catch(e){}`}
         </Script>

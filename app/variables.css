@@ -1,0 +1,63 @@
+/* ─────────────────────────────────────────────
+   Design tokens — imported by globals.css
+   ───────────────────────────────────────────── */
+
+:root {
+  color-scheme: dark;
+
+  /* ── Palette ── */
+  --ink: #0e0908;
+  --surface: #17100f;
+  --paper: #f3e6d0;
+  --gold: #c9a227;
+  --gold-soft: #e0c36a;
+  --wine: #6e1c28;
+
+  /* ── Typography ── */
+  --font-display: var(--font-mina), "Mina", sans-serif;
+  --font-bengali: var(--font-mina), "Mina", sans-serif;
+  --font-title: var(--font-mina), "Mina", sans-serif;
+
+  /* ── Spacing scale ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Border radius ── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* ── Z-index layers ── */
+  --z-bg: 0;
+  --z-shell: 10;
+  --z-header: 10;
+  --z-playerbar: 30;
+  --z-queue-docked: 25;
+  --z-queue-overlay: 40;
+  --z-queue-panel: 50;
+
+  /* ── Player bar ── */
+  --playerbar-height: 88px;
+  --queue-panel-width: 22rem;
+}
+
+html.light {
+  color-scheme: light;
+  --ink: #f3ece1;
+  --surface: #e7dccb;
+  --paper: #1a110e;
+  --gold: #c4283a;
+  --gold-soft: #e04a58;
+  --wine: #8b1e2d;
+}

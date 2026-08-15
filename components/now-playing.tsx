@@ -1,40 +1,26 @@
 "use client";
 
-import { Pause, Play } from "lucide-react";
 import { usePlayer } from "./player-provider";
+import { SITE_NAME, SITE_NAME_BN } from "@/lib/constants";
 
 export function NowPlaying() {
-  const { current, isPlaying, isReady, toggle } = usePlayer();
+  const { current, isPlaying } = usePlayer();
 
   return (
-    <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-70 pt-8 text-center">
-      <p className="font-display text-[11px] tracking-[0.3em] text-gold uppercase">
-        {isPlaying ? "Now playing" : "Sunday Suspense"}
+    <main className="now-playing">
+      <p className="now-playing__status">
+        {isPlaying ? "Now playing" : SITE_NAME}
       </p>
 
-      <h2 className="mt-4 max-w-xl font-title text-3xl font-semibold text-balance text-paper drop-shadow-lg sm:text-4xl lg:text-5xl">
-        {current?.displayTitle ?? "একটা গল্প বেছে নিন"}
+      <h2 className="now-playing__title">
+        {SITE_NAME_BN}
       </h2>
 
       {(current?.author || current?.englishTitle || current?.channelTitle) && (
-        <p className="mt-3 font-bengali text-sm text-paper/60">
-          {current?.author || current?.englishTitle || current?.channelTitle}
+        <p className="now-playing__author">
+          {current?.displayTitle} - By {current?.author || current?.englishTitle || current?.channelTitle}
         </p>
       )}
-
-      {/* <button
-        type="button"
-        onClick={toggle}
-        disabled={!isReady}
-        className="mt-10 flex size-20 items-center justify-center rounded-full border border-gold/40 bg-ink/40 text-paper backdrop-blur-sm transition hover:border-gold hover:bg-ink/60 disabled:opacity-40"
-        aria-label={isPlaying ? "বিরতি" : "চালান"}
-      >
-        {isPlaying ? (
-          <Pause className="size-8" />
-        ) : (
-          <Play className="ml-1 size-8" />
-        )}
-      </button> */}
     </main>
   );
 }
